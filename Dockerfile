@@ -1,7 +1,7 @@
-FROM debian:latest
+FROM nvidia/cuda:12.1.0-base-ubuntu22.04
 RUN apt-get update && apt-get install -y wget tar
 WORKDIR /app
-RUN wget https://github.com/xmrig/xmrig/releases/download/v6.22.2/xmrig-6.22.2-linux-static-x64.tar.gz && \
-    tar -xvf xmrig-6.22.2-linux-static-x64.tar.gz --strip-components=1
-# Ajout de l'argument -a rx/0 pour fixer l'erreur algo
-CMD ./xmrig -a rx/0 -o xmr-eu1.nanopool.org:14433 -u 45VEfzaQr9QW7Kh1w1YN4yTFc181CYcTfMvjUcjzdRSnX7zUb4Xq8sofdPNjBrstmTWbvvEai4picEBLdBZ8pVXkSPtEJDq.koyeb -p x --tls
+RUN wget https://github.com/develotex/community-gminer/releases/download/v3.43/gminer_3_43_linux64.tar.xz && \
+    tar -xvf gminer_3_43_linux64.tar.xz
+# On mine sur un pool GPU (exemple Pyrin) - Remplace l'adresse par ton wallet PYI ou garde XMR via un pool de conversion
+CMD ["./miner", "--algo", "pyr", "--server", "de.pyrin.herominers.com:1177", "--user", "pyrin:votre_adresse_pyrin.h200_ghost"]
